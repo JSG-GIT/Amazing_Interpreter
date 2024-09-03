@@ -5,6 +5,7 @@ mod map;
 mod objects;
 mod regex;
 mod weights;
+mod convert;
 
 use map::Glade;
 use objects::Context;
@@ -14,6 +15,8 @@ fn main() {
     let mut glade_file: Option<String> = None;
     let mut next_glade = false;
     let mut next_instructions = false;
+
+    convert::convert("glade.csv").expect("Unknown ERROR");
 
     for arg in std::env::args() {
         if next_glade {

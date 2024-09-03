@@ -29,27 +29,33 @@ impl Content {
         let i = chars.next().unwrap();
         let left = String::from_iter(chars.take_while(|c| c.is_numeric()));
         match i {
-            'q' => Self::Obstacle,
-            'x' => Self::Bomb(
+            'o' => Self::Obstacle,
+            'b' => Self::Bomb(
                 i32::from_str_radix(&left, 10).expect("no value associated with the bomb"),
                 0,
             ),
-            'w' => Self::WhiteSquare,
-            'g' => Self::GraySquare,
-            'r' => Self::RedSquare,
-            'o' => Self::OrangeSquare,
-            'y' => Self::YellowSquare,
-            'e' => Self::GreenSquare,
-            'b' => Self::BlueSquare,
-            'p' => Self::PurpleSquare,
-            'l' => Self::BlackSquare,
-            't' => Self::Target(
+            'c' => {
+                let var = i32::from_str_radix(&left, 10).expect("no value associated with the colour");
+                match var {
+                    0 => Self::WhiteSquare,
+                    1 => Self::GraySquare,
+                    2 => Self::RedSquare,
+                    3 => Self::OrangeSquare,
+                    4 => Self::YellowSquare,
+                    5 => Self::GreenSquare,
+                    6 => Self::BlueSquare,
+                    7 => Self::PurpleSquare,
+                    8 => Self::BlackSquare,
+                    default => Self::WhiteSquare
+                }
+            },
+            'd' => Self::Target(
                 i32::from_str_radix(&left, 10).expect("no value associated with the target") - 1,
             ),
-            'm' => Self::Money(
+            'e' => Self::Money(
                 i32::from_str_radix(&left, 10).expect("no value associated with the money"),
             ),
-            'd' => Self::Turner(
+            'r' => Self::Turner(
                 i32::from_str_radix(&left, 10).expect("no value associated with the turner"),
             ),
             's' => Self::Griever(

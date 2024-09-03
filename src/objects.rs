@@ -146,13 +146,15 @@ impl Context {
             if let Some(i) = v {
                 return *i;
             }
+                // UNINITIALISED IS 0!!!
+            else { return 0; }
         }
         panic!("no variable named {} defined", name)
     }
 
     pub fn add_points(&mut self, p: i32) {
         self.points += p;
-        // println!("points: {}", self.points);
+        println!("points: {}", self.points);
         if self.points > 2020 {
             panic!(
                 "Used up too much of your money! your total expenses are: {}",
